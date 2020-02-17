@@ -8,6 +8,7 @@ use Codeception\Module\Percy\Exchange\Client;
 use Codeception\Module\Percy\Exchange\Payload;
 use Codeception\Module\Percy\InfoFactory;
 use Codeception\Module\Percy\ClassFactory;
+use Dotenv\Dotenv;
 use ReflectionClass;
 use Exception;
 
@@ -53,6 +54,10 @@ class Percy extends Module
      */
     public function _initialize()
     {
+        // Init `.env`
+        $dotEnv = Dotenv::createImmutable(__DIR__ . '/../../../');
+        $dotEnv->load();
+
         $this->webDriver = $this->getModule($this->_getConfig('driver'));
         // Init cURL client with default adapter
         $this->client = ClassFactory::createClass(Client::class, [

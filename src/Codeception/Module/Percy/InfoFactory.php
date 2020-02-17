@@ -36,8 +36,6 @@ final class InfoFactory
      */
     public static function createClientInfo() : string
     {
-        $moduleInfo = json_decode(file_get_contents(__DIR__ . '/../../../../composer.json'), true);
-
-        return sprintf('%s/%s', explode('/', $moduleInfo['name'])[1], $moduleInfo['version']);
+        return sprintf('%s/%s', getenv('CODECEPTION_PERCY_CLIENT_NAME'), getenv('CODECEPTION_PERCY_CLIENT_VERSION'));
     }
 }
